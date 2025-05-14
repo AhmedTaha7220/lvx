@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVXIN - Contract Revision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/stylee.css">
+  
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="绿信标志">
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="subscriptions" class="en-content">定价</a>
+            <a href="aboutus" class="en-content">关于我们</a>
+            <a href="helpcenter" class="en-content">帮助中心</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- Elfsight 网站翻译器 | 无标题网站翻译器 -->
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+
+            <a href="profile" class="profile-component">
+                <img src="../static/images/profile.jpeg" class="profile-image" alt="个人资料图片">
+                <span class="profile-name">{{name}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+        <div class="nav-section">
+            <div class="nav-title">团队数据库</div>
+            
+            <a href="upload_contract" class="nav-item"> <i class="fas fa-file-upload"></i> 上传合同 </a>
+            <a href="history" class="nav-item"> <i class="fas fa-history"></i> 分析历史 </a>
+            <a href="analysis" class="nav-item active"> <i class="fas fa-folder-open"></i> 文档分析 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">账户</div>
+            <a href="profile" class="nav-item"> <i class="fas fa-user"></i> 用户资料 </a>
+            <a href="subscriptions" class="nav-item"> <i class="fas fa-star"></i> 订阅 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">支持</div>
+            <a href="contactus" class="nav-item"> <i class="fas fa-envelope"></i> 联系我们 </a>
+            <a href="helpcenter" class="nav-item"> <i class="fas fa-question-circle"></i> 常见问题 </a>
+            <a href="aboutus" class="nav-item"> <i class="fas fa-info-circle"></i> 关于我们 </a>
+            <a href="whats-new" class="nav-item "><i class="fas fa-info-circle"></i>有什么新的</a>
+        </div>
+    </nav>
+
+    <!-- 上传提示容器 -->
+    <div class="upload-prompt" style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        max-width: 400px;
+    ">
+        <div style="font-size: 6rem; color: var(--primary); margin-bottom: 1rem;">
+            <i class="fas fa-file-upload"></i>
+        </div>
+        <h2 style="margin-bottom: 1rem;">未上传合同</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+            请先上传合同以查看分析
+        </p>
+        <a href="upload_contract" class="primary-btn" style="padding: 1rem 2rem;">
+            <i class="fas fa-upload"></i> 上传合同
+        </a>
+    </div>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    </script>
+</body>
+
+</html>

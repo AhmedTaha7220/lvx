@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - LVXIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/stylee.css">
+    <style>
+
+        
+        /* Main Content */
+        
+        .main-content {
+            margin-left: 240px;
+            padding: 4rem 2rem;
+            flex: 1;
+            margin-top: 80px;
+            /* Creates space below the navbar */
+        }
+        
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+        
+        .dashboard-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.2);
+        }
+        
+        .pricing-card.highlight {
+            border-color: var(--primary);
+        }
+        
+        .pricing-card.highlight::after {
+            content: 'Most Popular';
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.25rem 1.5rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .plan-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            white-space: pre;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+        
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .features-list li i {
+            color: var(--success);
+        }
+        
+        .btn-choose {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+        }
+        
+        .btn-choose:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        /* Payment Methods */
+        
+        .payment-methods {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .payment-methods h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .payment-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .payment-method img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 0.5rem;
+        }
+        /* Metric Card */
+        
+        .metric-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+            margin-top: 2rem;
+        }
+        
+        .metric-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        /* Modal Styles */
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: flex-end;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .confirm-btn {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+        }
+        
+        .confirm-btn:disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
+        }
+        
+        .cancel-btn {
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--text-primary);
+        }
+        /* Success Toast */
+        
+        .success-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1100;
+            animation: fadeInOut 3s forwards;
+        }
+        
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            10%,
+            90% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1rem;
+            }
+            .navbar {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .payment-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+       
+        /* Responsive Profile */
+        @media (max-width: 768px) {
+            .profile-component {
+                padding: 0.5rem;
+                gap: 0.5rem;
+            }
+            .profile-name {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="绿信标志">
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="subscriptions" class="en-content">定价</a>
+            <a href="aboutus" class="en-content">关于我们</a>
+            <a href="helpcenter" class="en-content">帮助中心</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- Elfsight 网站翻译器 | 无标题网站翻译器 -->
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+
+            <a href="profile" class="profile-component">
+                <img src="../static/images/profile.jpeg" class="profile-image" alt="个人资料图片">
+                <span class="profile-name">{{name}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+        <div class="nav-section">
+            <div class="nav-title">团队数据库</div>
+           
+            <a href="upload_contract" class="nav-item"> <i class="fas fa-file-upload"></i> 上传合同 </a>
+            <a href="history" class="nav-item"> <i class="fas fa-history"></i> 分析历史 </a>
+            <a href="analysis" class="nav-item"> <i class="fas fa-folder-open"></i> 文档分析 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">账户</div>
+            <a href="profile" class="nav-item"> <i class="fas fa-user"></i> 用户资料 </a>
+            <a href="subscriptions" class="nav-item active"> <i class="fas fa-star"></i> 订阅 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">支持</div>
+            <a href="contactus" class="nav-item"> <i class="fas fa-envelope"></i> 联系我们 </a>
+            <a href="helpcenter" class="nav-item"> <i class="fas fa-question-circle"></i> 常见问题 </a>
+            <a href="aboutus" class="nav-item"> <i class="fas fa-info-circle"></i> 关于我们 </a>
+            <a href="whats-new" class="nav-item "><i class="fas fa-info-circle"></i> What's New</a>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <div class="dashboard-header">
+            <h1>选择您的计划</h1>
+            <div class="subtitle">为您的需求选择最佳定价计划</div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- 全球冠军 -->
+            <div class="pricing-card" data-plan="Global Champion">
+                <div class="plan-title">全球<br>冠军</div>
+                <div class="price">€119<span>/月</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 无限项目</li>
+                    <li><i class="fas fa-check"></i> 30个协作者</li>
+                    <li><i class="fas fa-check"></i> 200,000字</li>
+                    <li><i class="fas fa-check"></i> 翻译编辑器</li>
+                    <li><i class="fas fa-check"></i> 集成</li>
+                    <li><i class="fas fa-check"></i> 抑制/缺陷</li>
+                    <li><i class="fas fa-check"></i> 高级报告</li>
+                    <li><i class="fas fa-check"></i> 翻译记忆</li>
+                    <li><i class="fas fa-check"></i> 翻译历史</li>
+                    <li><i class="fas fa-check"></i> 机器翻译</li>
+                    <li><i class="fas fa-check"></i> 优先支持</li>
+                </ul>
+                <button class="btn-choose">选择计划</button>
+            </div>
+
+            <!-- 走向国际（热门） -->
+            <div class="pricing-card highlight" data-plan="Going International">
+                <div class="plan-title">走向<br>国际</div>
+                <div class="price">€59<span>/月</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 无限项目</li>
+                    <li><i class="fas fa-check"></i> 20个协作者</li>
+                    <li><i class="fas fa-check"></i> 100,000字</li>
+                    <li><i class="fas fa-check"></i> 翻译编辑器</li>
+                    <li><i class="fas fa-check"></i> 集成</li>
+                    <li><i class="fas fa-check"></i> 抑制/缺陷</li>
+                    <li><i class="fas fa-check"></i> 高级报告</li>
+                    <li><i class="fas fa-check"></i> 翻译记忆</li>
+                    <li><i class="fas fa-check"></i> 翻译历史</li>
+                    <li><i class="fas fa-check"></i> 机器翻译</li>
+                    <li><i class="fas fa-check"></i> 优先支持</li>
+                </ul>
+                <button class="btn-choose">选择计划</button>
+            </div>
+
+            <!-- 语言/启动 -->
+            <div class="pricing-card" data-plan="Langu/Start">
+                <div class="plan-title">语言/<br>启动</div>
+                <div class="price">€19<span>/月</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 无限项目</li>
+                    <li><i class="fas fa-check"></i> 10个协作者</li>
+                    <li><i class="fas fa-check"></i> 50,000字</li>
+                    <li><i class="fas fa-check"></i> 翻译编辑器</li>
+                    <li><i class="fas fa-check"></i> 集成</li>
+                    <li><i class="fas fa-check"></i> 项目页面</li>
+                    <li><i class="fas fa-check"></i> 翻译记忆</li>
+                    <li><i class="fas fa-check"></i> 翻译历史</li>
+                    <li><i class="fas fa-check"></i> 机器翻译</li>
+                    <li><i class="fas fa-check"></i> 优先支持</li>
+                </ul>
+                <button class="btn-choose">开始免费试用</button>
+            </div>
+        </div>
+
+        <!-- 支付方式 -->
+        <div class="payment-methods">
+            <h2>安全支付方式</h2>
+            <div class="payment-grid">
+                <div class="payment-method" data-method="alipay">
+                    <img src="https://img.alicdn.com/tfs/TB1PHhXzuH2gK0jSZJnXXaT1FXa-160-160.png" alt="支付宝">
+                </div>
+                <div class="payment-method" data-method="wechat">
+                    <img src="https://www.wechat.com/en/images/wechat_pay.png" alt="微信支付">
+                </div>
+                <div class="payment-method" data-method="unionpay">
+                    <img src="https://www.unionpayintl.com/img/logo2x.png" alt="银联">
+                </div>
+                <div class="payment-method" data-method="stripe">
+                    <i class="fab fa-cc-visa fa-2x"></i>
+                    <i class="fab fa-cc-mastercard fa-2x"></i>
+                </div>
+                <div class="payment-method" data-method="paypal">
+                    <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal">
+                </div>
+            </div>
+        </div>
+
+        <!-- 附加信息 -->
+        <div class="metric-card">
+            <h3><i class="fas fa-shield-alt"></i> 安全保障</h3>
+            <ul class="features-list">
+                <li><i class="fas fa-check"></i> SSL加密交易</li>
+                <li><i class="fas fa-check"></i> 符合PCI DSS标准</li>
+                <li><i class="fas fa-check"></i> 7天退款保证</li>
+            </ul>
+        </div>
+    </main>
+</body>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+        // Payment Method Selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Toast Notification System
+        function showMessage(message) {
+            const toast = document.createElement('div');
+            toast.className = 'success-toast';
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Modal Confirmation for Payment
+        document.addEventListener('DOMContentLoaded', () => {
+            const chooseButtons = document.querySelectorAll('.btn-choose');
+
+            chooseButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.pricing-card');
+                    const planTitle = card.querySelector('.plan-title').textContent;
+                    const planPrice = card.querySelector('.price').textContent;
+                    showPaymentMethodsModal(planTitle, planPrice);
+                });
+            });
+
+            function showPaymentMethodsModal(title, price) {
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <h3>Select Payment Method</h3>
+                        <p>For plan: <strong>${title}</strong> (${price})</p>
+                        <div class="payment-methods">
+                            <div class="payment-method" data-method="alipay">
+                                <img src="https://img.alicdn.com/tfs/TB1PHhXzuH2gK0jSZJnXXaT1FXa-160-160.png" alt="Alipay">
+                            </div>
+                            <div class="payment-method" data-method="wechat">
+                                <img src="https://www.wechat.com/en/images/wechat_pay.png" alt="WeChat Pay">
+                            </div>
+                            <div class="payment-method" data-method="unionpay">
+                                <img src="https://www.unionpayintl.com/img/logo2x.png" alt="UnionPay">
+                            </div>
+                            <div class="payment-method" data-method="stripe">
+                                <i class="fab fa-cc-visa fa-2x"></i>
+                                <i class="fab fa-cc-mastercard fa-2x"></i>
+                            </div>
+                            <div class="payment-method" data-method="paypal">
+                                <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal">
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="modal-btn cancel-btn">Cancel</button>
+                            <button class="modal-btn confirm-btn" disabled>Confirm Payment</button>
+                        </div>
+                    </div>
+                `;
+
+                let selectedMethod = null;
+                modal.querySelectorAll('.payment-method').forEach(method => {
+                    method.addEventListener('click', function() {
+                        modal.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedMethod = this.dataset.method;
+                        modal.querySelector('.confirm-btn').disabled = false;
+                    });
+                });
+
+                modal.querySelector('.cancel-btn').addEventListener('click', () => modal.remove());
+
+                modal.querySelector('.confirm-btn').addEventListener('click', () => {
+                    modal.remove();
+                    processPayment(selectedMethod, title, price);
+                });
+
+                document.body.appendChild(modal);
+            }
+
+            async function processPayment(method, plan, price) {
+                showMessage(`Processing payment for ${plan}...`);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                showMessage(`Success! ${plan.trim()} (${price}) purchased using ${methodToName(method)}.`);
+            }
+
+            function methodToName(method) {
+                return {
+                    alipay: 'Alipay',
+                    wechat: 'WeChat Pay',
+                    unionpay: 'UnionPay',
+                    stripe: 'Credit/Debit Card',
+                    paypal: 'PayPal'
+                }[method];
+            }
+        });
+    </script>
+</body>
+
+</html>

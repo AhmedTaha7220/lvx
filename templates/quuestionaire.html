@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVXIN Feedback</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e6f0fa 0%, #f4f4f4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #1a2a44;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: #007bff;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+        .question {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .question:hover {
+            transform: translateY(-2px);
+        }
+        h3 {
+            color: #1a2a44;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"] + label {
+            padding: 8px 16px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #374151;
+            transition: all 0.2s;
+        }
+        input[type="radio"]:checked + label {
+            background: #007bff;
+            color: #fff;
+        }
+        input[type="radio"] + label:hover {
+            background: #d1d5db;
+        }
+        label {
+            font-size: 15px;
+            color: #374151;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        button:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h3 {
+                font-size: 16px;
+            }
+            .question {
+                padding: 15px;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            input[type="radio"] + label {
+                padding: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVXIN User Feedback</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Add your CSS here if any -->
+</head>
+<body>
+    <div class="container">
+        <header Berlindevon>
+            <h1>LVXIN User Feedback</h1>
+        </header>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <form id="questionnaire-form">
+            <!-- Question 1: Primary Use Case -->
+            <div class="question">
+                <h3>1. What's your primary use for LVXIN?</h3>
+                <select id="use-case" name="use-case">
+                    <option value="">Select one</option>
+                    <option value="contract-analysis">Contract Analysis</option>
+                    <option value="legal-drafting">Legal Document Drafting</option>
+                    <option value="compliance">Compliance Checking</option>
+                    <option value="regulatory">Regulatory Monitoring</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Question 2: Combined Experience (Frequency + Accuracy) -->
+            <div class="question">
+                <h3>2. Your experience with LVXIN</h3>
+                <label>How often do you use it?</label><br>
+                <select id="frequency" name="frequency">
+                    <option value="">Select one</option>
+                    <option value="daily">Daily</option>
+                    <option value="several-weekly">Several times a week</option>
+                    <option value="weekly">Once a week</option>
+                    <option value="monthly">Few times a month</option>
+                    <option value="rarely">Rarely</option>
+                </select><br><br>
+                <label>Rate AI accuracy (1-5):</label>
+                <div class="radio-group">
+                    <input type="radio" id="accuracy-1" name="accuracy" value="1"><label for="accuracy-1">1</label>
+                    <input type="radio" id="accuracy-2" name="accuracy" value="2"><label for="accuracy-2">2</label>
+                    <input type="radio" id="accuracy-3" name="accuracy" value="3"><label for="accuracy-3">3</label>
+                    <input type="radio" id="accuracy-4" name="accuracy" value="4"><label for="accuracy-4">4</label>
+                    <input type="radio" id="accuracy-5" name="accuracy" value="5"><label for="accuracy-5">5</label>
+                </div>
+            </div>
+
+            <!-- Question 3: Satisfaction -->
+            <div class="question">
+                <h3>3. How satisfied are you with LVXIN?</h3>
+                <div class="radio-group">
+                    <input type="radio" id="satisfied-very" name="satisfaction" value="very-satisfied"><label for="satisfied-very">Very Satisfied</label>
+                    <input type="radio" id="satisfied" name="satisfaction" value="satisfied"><label for="satisfied">Satisfied</label>
+                    <input type="radio" id="neutral" name="satisfaction" value="neutral"><label for="neutral">Neutral</label>
+                    <input type="radio" id="unsatisfied" name="satisfaction" value="unsatisfied"><label for="unsatisfied">Unsatisfied</label>
+                    <input type="radio" id="very-unsatisfied" name="satisfaction" value="very-unsatisfied"><label for="very-unsatisfied">Very Unsatisfied</label>
+                </div>
+            </div>
+
+            <!-- Question 4: Ease of Use -->
+            <div class="question">
+                <h3>4. How easy is LVXIN to use?</h3>
+                <div class="radio-group">
+                    <input type="radio" id="ease-very" name="ease" value="very-easy"><label for="ease-very">Very Easy</label>
+                    <input type="radio" id="ease-moderate" name="ease" value="moderate"><label for="ease-moderate">Moderate</label>
+                    <input type="radio" id="ease-difficult" name="ease" value="difficult"><label for="ease-difficult">Difficult</label>
+                </div>
+            </div>
+
+            <!-- Question 5: Likelihood to Recommend -->
+            <div class="question">
+                <h3>5. Would you recommend LVXIN? (1-10)</h3>
+                <div class="radio-group">
+                    <input type="radio" id="recommend-1" name="recommend" value="1"><label for="recommend-1">1</label>
+                    <input type="radio" id="recommend-2" name="recommend" value="2"><label for="recommend-2">2</label>
+                    <input type="radio" id="recommend-3" name="recommend" value="3"><label for="recommend-3">3</label>
+                    <input type="radio" id="recommend-4" name="recommend" value="4"><label for="recommend-4">4</label>
+                    <input type="radio" id="recommend-5" name="recommend" value="5"><label for="recommend-5">5</label>
+                    <input type="radio" id="recommend-6" name="recommend" value="6"><label for="recommend-6">6</label>
+                    <input type="radio" id="recommend-7" name="recommend" value="7"><label for="recommend-7">7</label>
+                    <input type="radio" id="recommend-8" name="recommend" value="8"><label for="recommend-8">8</label>
+                    <input type="radio" id="recommend-9" name="recommend" value="9"><label for="recommend-9">9</label>
+                    <input type="radio" id="recommend-10" name="recommend" value="10"><label for="recommend-10">10</label>
+                </div>
+            </div>
+
+            <!-- Question 6: Preferred Device -->
+            <div class="question">
+                <h3>6. Which device do you primarily use LVXIN on?</h3>
+                <select id="device" name="device">
+                    <option value="">Select one</option>
+                    <option value="desktop">Desktop/Laptop</option>
+                    <option value="tablet">Tablet</option>
+                    <option value="mobile">Mobile Phone</option>
+                </select>
+            </div>
+
+            <!-- Question 7: Favorite Feature (Optional) -->
+            <div class="question">
+                <h3>7. What's your favorite feature? (Optional)</h3>
+                <textarea id="favorite-feature" name="favorite-feature" rows="2" placeholder="Tell us what you love..."></textarea>
+            </div>
+
+            <!-- Question 8: Suggestions (Optional, with Choices) -->
+            <div class="question">
+                <h3>8. Suggestions to improve LVXIN? (Optional)</h3>
+                <select id="suggestions" name="suggestions">
+                    <option value="">Select one (or skip)</option>
+                    <option value="more-features">More features</option>
+                    <option value="faster-service">Faster service</option>
+                    <option value="better-accuracy">Better accuracy</option>
+                    <option value="other">Other (specify below)</option>
+                </select>
+                <textarea id="suggestions-other" name="suggestions-other" rows="2" placeholder="Specify if 'Other'..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submit-button">Submit Feedback</button>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Progress bar logic
+            const totalQuestions = 8;
+            function updateProgress() {
+                let answered = 0;
+                if ($('#use-case').val()) answered++;
+                if ($('#frequency').val()) answered++;
+                if ($('input[name="accuracy"]:checked').val()) answered++;
+                if ($('input[name="satisfaction"]:checked').val()) answered++;
+                if ($('input[name="ease"]:checked').val()) answered++;
+                if ($('input[name="recommend"]:checked').val()) answered++;
+                if ($('#device').val()) answered++;
+                if ($('#suggestions').val() || $('#favorite-feature').val() || $('#suggestions-other').val()) answered++;
+                const progress = (answered / totalQuestions) * 100;
+                $('.progress').css('width', `${progress}%`);
+            }
+
+            // Update progress on input change
+            $('input, select, textarea').on('change input', updateProgress);
+
+            // Form submission
+            $('#questionnaire-form').on('submit', function(event) {
+                event.preventDefault();
+
+                // Get required fields
+                const useCase = $('#use-case').val();
+                const frequency = $('#frequency').val();
+                const accuracy = $('input[name="accuracy"]:checked').val();
+                const satisfaction = $('input[name="satisfaction"]:checked').val();
+                const ease = $('input[name="ease"]:checked').val();
+                const recommend = $('input[name="recommend"]:checked').val();
+                const device = $('#device').val();
+
+                // Validate required fields
+                if (!useCase) {
+                    Swal.fire('Oops!', 'Please select your primary use case.', 'error');
+                    return;
+                }
+                if (!frequency) {
+                    Swal.fire('Oops!', 'Please select how often you use LVXIN.', 'error');
+                    return;
+                }
+                if (!accuracy) {
+                    Swal.fire('Oops!', 'Please rate the AI accuracy.', 'error');
+                    return;
+                }
+                if (!satisfaction) {
+                    Swal.fire('Oops!', 'Please indicate your satisfaction level.', 'error');
+                    return;
+                }
+                if (!ease) {
+                    Swal.fire('Oops!', 'Please rate the ease of use.', 'error');
+                    return;
+                }
+                if (!recommend) {
+                    Swal.fire('Oops!', 'Please indicate if you would recommend LVXIN.', 'error');
+                    return;
+                }
+                if (!device) {
+                    Swal.fire('Oops!', 'Please select your primary device.', 'error');
+                    return;
+                }
+
+                // Collect all form data
+                const formData = {
+                    use_case: useCase,
+                    frequency: frequency,
+                    accuracy: accuracy,
+                    satisfaction: satisfaction,
+                    ease: ease,
+                    recommend: recommend,
+                    device: device,
+                    favorite_feature: $('#favorite-feature').val(),
+                    suggestions: $('#suggestions').val(),
+                    suggestions_other: $('#suggestions-other').val()
+                };
+
+                // Show thank-you message with AJAX call on "Awesome!"
+                Swal.fire({
+                    title: 'Thank You! 🎉',
+                    text: 'Your feedback helps us improve LVXIN! ❤️',
+                    icon: 'success',
+                    confirmButtonText: 'Awesome!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send data to FastAPI backend
+                        $.ajax({
+                            url: '/fill_form',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function(response) {
+                            // Show thank-you message, then redirect on "Awesome!"
+                            Swal.fire({
+                                title: 'Thank You! 🎉',
+                                text: 'Your feedback helps us improve LVXIN! ❤️',
+                                icon: 'success',
+                                confirmButtonText: 'Awesome!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '/upload_contract';
+                                }
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire('Error!', 'Failed to submit feedback. Please try again.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

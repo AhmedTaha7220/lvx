@@ -1,0 +1,40 @@
+{
+    "analysis": {
+        "filename": "demo-contract.pdf",
+        "contract_type": "Employment Agreement",
+        "key_clauses": ["Termination", "Renewal"],
+        "parties": ["Employer", "Employee"]
+    },
+    "recommendations": [
+        "Add mutual termination notice period",
+        "Clarify renewal terms"
+    ],
+    "risk_analysis": {
+        "high_risk": ["Unilateral termination clause"],
+        "medium_risk": ["Vague renewal terms"]
+    },
+    "comparison": {
+        "original": {
+            "sections": {
+                "1": {
+                    "content": [
+                        "The term of service begins on September 1, 2022...",
+                        "Party A reserves the right to terminate..."
+                    ],
+                    "modified": "2025-03-15"
+                }
+            }
+        },
+        "revised": {
+            "sections": {
+                "1": {
+                    "content": [
+                        "The term of service begins on September 1, 2022...",
+                        "Both parties agree to provide thirty (30) days..."
+                    ],
+                    "modified": "2025-03-20"
+                }
+            }
+        }
+    }
+}

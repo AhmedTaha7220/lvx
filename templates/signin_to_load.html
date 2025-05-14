@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVXIN - Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+         :root {
+            --primary: #4A90E2;
+            --secondary: #6C5CE7;
+            --success: #00B894;
+            --danger: #D63031;
+            --warning: #FDCB6E;
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --card-bg: #FFFFFF;
+            --body-bg: #F8F9FA;
+            --gradient-start: #4A90E2;
+            --gradient-end: #6C5CE7;
+            --google-bg: #4285F4;
+            /* Google blue */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: var(--body-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .login-container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.15);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .logo img {
+            width: 100px;
+            transition: all 0.7s ease;
+            filter: drop-shadow(0 4px 8px rgba(74, 144, 226, 0.3));
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 5px;
+        }
+        
+        .logo:hover img {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 6px 12px rgba(74, 144, 226, 0.5));
+        }
+        
+        .social-login {
+            margin: 20px 0;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            color: white;
+        }
+        
+        .social-btn i {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .social-btn.wechat {
+            background: linear-gradient(135deg, var(--success), #09b83e);
+        }
+        
+        .social-btn.google {
+            background: linear-gradient(135deg, var(--google-bg), #66a3ff);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.3);
+        }
+        
+        .separator {
+            margin: 30px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary));
+        }
+        
+        .separator::before {
+            left: 0;
+        }
+        
+        .separator::after {
+            right: 0;
+            background: linear-gradient(to left, transparent, var(--primary));
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        
+        .links {
+            margin-top: 25px;
+        }
+        
+        .links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            margin: 8px 0;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 25px;
+                margin: 15px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .social-btn {
+                font-size: 14px;
+            }
+            .logo img {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src=" ../static/images/logo.jpg " alt="LVXIN Logo ">
+        </div>
+
+        <script src="https://static.elfsight.com/platform/platform.js" async></script>
+        <div class="elfsight-app-6f017616-600a-46e6-a14a-f6ac550a093e" data-elfsight-app-lazy></div>
+        <h1>LVXIN - Sign In</h1>
+
+        <div class="social-login ">
+            <button class="social-btn wechat " onclick="wechatLogin() ">
+                <i class="fab fa-weixin "></i> Sign in with WeChat
+            </button>
+
+        </div>
+
+        <div class="separator ">Or</div>
+
+        <form action="signin_to_load" method="POST">
+            {% if error_message %}
+            <div style="color: red; font-size: medium; margin-bottom: 15px; text-align: center;">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="输入您的用户名" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">password</label>
+                <input type="password" id="password" name="password" placeholder="输入您的密码" required>
+            </div>
+
+            <button type="submit" class="submit-btn">submit</button>
+        </form>
+
+        <div class="links">
+            <a href="forgetpassword.html">forgetpassword?</a>
+            <a href="signup">New user? SignUp</a>
+        </div>
+    </div>
+
+    <script>
+        function wechatLogin() {
+            window.location.href = "https://open.weixin.qq.com/connect/qrconnect?appid=YOUR_APP_ID&redirect_uri=YOUR_REDIRECT_URL&response_type=code&scope=snsapi_login#wechat_redirect ";
+        }
+
+        function googleLogin() {
+            window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile ";
+        }
+    </script>
+    <script>
+        function redirectToLoading() {
+            window.location.href = "loading ";
+        }
+    </script>
+    
+</body>
+
+</html>

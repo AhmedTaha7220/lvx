@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Lvxin Legal Technology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/stylee.css">
+    <style>
+        
+        
+        /* Main Content */
+        
+        .main-content {
+            margin-left: 240px;
+            padding: 1rem 2rem;
+            flex: 1;
+        }
+        
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+        }
+        
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .member-image {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 50%; /* For circular images */
+            margin: 0 auto 15px;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This ensures the image covers the area without distortion */
+        }
+        .member-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+        }
+        
+        .member-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            margin: 0 auto 1rem;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .value-card {
+            background: rgba(74, 144, 226, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .value-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1rem;
+            }
+            .navbar {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="绿信标志">
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="subscriptions" class="en-content">定价</a>
+            <a href="aboutus" class="en-content">关于我们</a>
+            <a href="helpcenter" class="en-content">帮助中心</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- Elfsight 网站翻译器 | 无标题网站翻译器 -->
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+            <a href="profile" class="profile-component">
+                <img src="../static/images/profile.jpg" class="profile-image" alt="个人资料图片">
+                <span class="profile-name">{{name}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+        <div class="nav-section">
+            <div class="nav-title">团队数据库</div>
+            
+            <a href="upload_contract" class="nav-item"> <i class="fas fa-file-upload"></i> 上传合同 </a>
+            <a href="history" class="nav-item"> <i class="fas fa-history"></i> 分析历史 </a>
+            <a href="analysis" class="nav-item"> <i class="fas fa-folder-open"></i> 文档分析 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">账户</div>
+            <a href="profile" class="nav-item"> <i class="fas fa-user"></i> 用户资料 </a>
+            <a href="subscriptions" class="nav-item"> <i class="fas fa-star"></i> 订阅 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">支持</div>
+            <a href="contactus" class="nav-item"> <i class="fas fa-envelope"></i> 联系我们 </a>
+            <a href="helpcenter" class="nav-item"> <i class="fas fa-question-circle"></i> 常见问题 </a>
+            <a href="aboutus" class="nav-item active"> <i class="fas fa-info-circle"></i> 关于我们 </a>
+            <a href="whats-new" class="nav-item "><i class="fas fa-info-circle"></i>有什么新的</a>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <!-- 我们的故事 -->
+        <section class="section">
+            <h2>我们的故事</h2>
+            <p>成立于2025年1月，旨在通过先进的AI技术革新中国的法律服务。我们位于深圳，团队结合法律专长与尖端AI创新，使法律援助变得可访问、高效且价格合理。</p>
+            <div class="section" style="background: rgba(74, 144, 226, 0.05); margin-top: 1rem;">
+                <h3>我们的使命</h3>
+                <p>通过创新的AI解决方案，使中国的法律服务大众化，让法律援助变得可访问、高效且价格合理。</p>
+            </div>
+        </section>
+
+        <!-- 领导团队 -->
+        <section class="section">
+            <h2>领导团队</h2>
+            <div class="leadership-grid">
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="../static/images/Mahmoud.jpg" alt="马哈茂德·哈姆迪">
+                    </div>
+                    <h3>马哈茂德·哈姆迪</h3>
+                    <p>首席执行官兼创始人</p>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="../static/images/Mali.png" alt="李">
+                    </div>
+                    <h3>李</h3>
+                    <p>财务主管</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="../static/images/AhmedTaha.jpg" alt="艾哈迈德·塔哈">
+                    </div>
+                    <h3>艾哈迈德·塔哈</h3>
+                    <p>信息技术主管</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="../static/images/Yara.png" alt="亚拉·艾哈迈德">
+                    </div>
+                    <h3>亚拉·艾哈迈德</h3>
+                    <p>人工智能主管</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 我们的价值观 -->
+        <section class="section">
+            <h2>我们的价值观</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>卓越</h3>
+                    <p>致力于所有运营中的卓越表现</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>诚信</h3>
+                    <p>在所有交易中遵循道德规范</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-universal-access"></i>
+                    <h3>可访问性</h3>
+                    <p>让法律服务对所有人开放</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-globe-asia"></i>
+                    <h3>文化敏感性</h3>
+                    <p>理解中国独特的法律环境</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    </script>
+</body>
+
+</html>

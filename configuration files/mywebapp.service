@@ -1,0 +1,16 @@
+[Unit]
+Description=MyWebApp FastAPI application
+After=network.target
+
+[Service]
+User=admin
+Group=admin
+WorkingDirectory=/home/admin/Lvxin_Project
+ExecStart=/home/admin/Lvxin_Project/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker -t 3000 main:app -b 0.0.0.0:8000
+Restart=always
+TimeoutStartSec=120
+TimeoutStopSec=60
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

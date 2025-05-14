@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New - Lvxin Legal Technology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/stylee.css">
+    <style>
+        /* CSS Variables (Fallback if not in stylee.css) */
+        :root {
+            --primary-blue: #3b82f6;
+            --secondary-pink: #ec4899;
+            --accent-amber: #f59e0b;
+            --accent-green: #10b981;
+            --background: #f3f4f6;
+            --text-primary: #1f2937;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary-blue), var(--secondary-pink));
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--gradient);
+            color: #fff;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: gradientShift 10s ease infinite;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #fff;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s, color 0.3s;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .hero .cta-button:hover {
+            background: var(--primary-blue);
+            color: #fff;
+        }
+
+        /* Updates Controls */
+        .updates-controls {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .updates-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        .filter-btn i {
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--gradient);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .updates-search {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .updates-search input {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid var(--primary-blue);
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+
+        .updates-search button {
+            padding: 10px;
+            background: var(--primary-blue);
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .updates-search button:hover {
+            background: var(--secondary-pink);
+        }
+
+        .layout-toggle {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--primary-blue);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .layout-toggle.active,
+        .layout-toggle:hover {
+            background: var(--primary-blue);
+            color: #fff;
+        }
+
+        /* Updates Section */
+        .updates {
+            max-width: 900px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .updates.grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .updates.timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+        }
+
+        .updates.timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient);
+            transform: translateX(-50%);
+        }
+
+        .update-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .update-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .updates.grid .update-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .updates.timeline .update-card {
+            width: 45%;
+            margin: 0 10px;
+        }
+
+        .updates.timeline .update-card:nth-child(odd) {
+            margin-left: 55%;
+        }
+
+        .updates.timeline .update-card:nth-child(even) {
+            margin-right: 55%;
+            margin-left: 10px;
+        }
+
+        .update-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+
+        .update-card:hover::before {
+            width: 10px;
+        }
+
+        .update-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .update-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .update-date {
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .update-card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .update-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .update-card p.expanded {
+            max-height: 1000px;
+        }
+
+        .update-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .read-more {
+            color: var(--primary-blue);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--secondary-pink);
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .share-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .share-btn:hover {
+            color: var(--primary-blue);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: var(--accent-amber);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 12px;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .feedback-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feedback-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feedback-form label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .feedback-form input,
+        .feedback-form textarea {
+            padding: 10px;
+            border: 1px solid var(--primary-blue);
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .feedback-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            direction: ltr;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 1.5rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .star-rating label:hover,
+        .star-rating input:checked ~ label,
+        .star-rating label.active {
+            color: var(--accent-amber);
+        }
+
+        .feedback-form button {
+            padding: 12px 24px;
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            align-self: flex-start;
+        }
+
+        .feedback-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-success {
+            display: none;
+            padding: 15px;
+            background: var(--accent-green);
+            color: #fff;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .feedback-list {
+            margin-top: 30px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .feedback-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feedback-item:last-child {
+            border-bottom: none;
+        }
+
+        .feedback-item .stars {
+            color: var(--accent-amber);
+            font-size: 1rem;
+        }
+
+        .feedback-item p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .feedback-item .author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .updates-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .updates-search input {
+                width: 100%;
+            }
+
+            .updates.timeline::before {
+                left: 20px;
+            }
+
+            .updates.timeline .update-card {
+                width: 100%;
+                margin: 0;
+            }
+
+            .updates.timeline .update-card:nth-child(odd),
+            .updates.timeline .update-card:nth-child(even) {
+                margin-left: 40px;
+                margin-right: 20px;
+            }
+
+            .feedback-form button {
+                align-self: stretch;
+            }
+        }
+
+        /* Accessibility */
+        .filter-btn:focus,
+        .layout-toggle:focus,
+        .read-more:focus,
+        .share-btn:focus,
+        .updates-search button:focus,
+        .feedback-form button:focus,
+        .star-rating label:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo">
+            <a href="welcome_page" aria-label="Lvxin Legal Technology Home">
+                <img src="../static/images/logo.jpg" alt="绿信标志" loading="lazy">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="subscriptions" class="en-content" data-zh="定价">Pricing</a>
+            <a href="aboutus" class="en-content" data-zh="关于我们">About Us</a>
+            <a href="helpcenter" class="en-content" data-zh="帮助中心">Help Center</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="languageToggle" class="icon-btn" aria-label="Toggle language">
+                <i class="fas fa-globe"></i>
+            </button>
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            
+           
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+            <a href="profile" class="profile-component" aria-label="User profile">
+                <img src="../static/images/profile.jpg" class="profile-image" alt="个人资料图片" loading="lazy">
+                <span class="profile-name">{{name}}</span>
+            </a>
+            
+        </div>
+    </nav>
+
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <button id="sidebarToggle" class="icon-btn" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+<!-- 侧边栏 -->
+<nav class="sidebar">
+    <div class="nav-section">
+        <div class="nav-title">团队数据库</div>
+        
+        <a href="upload_contract" class="nav-item"> <i class="fas fa-file-upload"></i> 上传合同 </a>
+        <a href="history" class="nav-item"> <i class="fas fa-history"></i> 分析历史 </a>
+        <a href="analysis" class="nav-item"> <i class="fas fa-folder-open"></i> 文档分析 </a>
+    </div>
+    <div class="nav-section">
+        <div class="nav-title">账户</div>
+        <a href="profile" class="nav-item"> <i class="fas fa-user"></i> 用户资料 </a>
+        <a href="subscriptions" class="nav-item"> <i class="fas fa-star"></i> 订阅 </a>
+    </div>
+    <div class="nav-section">
+        <div class="nav-title">支持</div>
+        <a href="contactus" class="nav-item"> <i class="fas fa-envelope"></i> 联系我们 </a>
+        <a href="helpcenter" class="nav-item"> <i class="fas fa-question-circle"></i> 常见问题 </a>
+        <a href="aboutus" class="nav-item"> <i class="fas fa-info-circle"></i> 关于我们 </a>
+        <a href="whats-new" class="nav-item active"><i class="fas fa-info-circle"></i> 有什么新的 </a>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="lang-switch" data-en="What's New at Lvxin Legal Technology" data-zh="绿信法律科技最新动态">What's New at Lvxin Legal Technology</h1>
+                <p class="lang-switch" data-en="Discover the latest features, enhancements, and announcements to empower your legal workflows." data-zh="探索最新的功能、改进和公告，助力您的法律工作流程。">Discover the latest features, enhancements, and announcements to empower your legal workflows.</p>
+                <a href="dashboard" class="cta-button lang-switch" data-en="Explore Features" data-zh="探索功能">Explore Features</a>
+            </div>
+        </header>
+
+        <section class="updates-controls">
+            <div class="updates-filter">
+                <button class="filter-btn active" data-filter="all"><i class="fas fa-th"></i> All</button>
+                <button class="filter-btn" data-filter="features"><i class="fas fa-cogs"></i> Features</button>
+                <button class="filter-btn" data-filter="ui"><i class="fas fa-paint-brush"></i> UI/UX</button>
+                <button class="filter-btn" data-filter="export"><i class="fas fa-file-export"></i> Export</button>
+                <select class="sort-select" aria-label="Sort updates">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+            <div class="updates-search">
+                <input type="text" placeholder="Search updates..." aria-label="Search updates" class="lang-switch" data-zh="搜索更新...">
+                <button aria-label="Search"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="layout-toggle" data-layout="grid" aria-label="Toggle layout">Grid View</button>
+        </section>
+
+        <section class="updates grid">
+            <div class="update-card" data-category="features" data-date="2025-05-01">
+                <span class="badge">Major Update</span>
+                <div class="update-header">
+                    <div class="update-icon"><i class="fas fa-brain"></i></div>
+                    <div>
+                        <div class="update-date">May 2025</div>
+                        <h2 class="lang-switch" data-en="AI-Powered Contract Analysis" data-zh="人工智能合同分析">AI-Powered Contract Analysis</h2>
+                    </div>
+                </div>
+                <p class="lang-switch" data-en="Our enhanced AI tool now scans contracts for risks and suggests optimizations in real-time, with improved accuracy and support for multi-language inputs, including Chinese. This update includes advanced clause detection and compliance checks." data-zh="我们增强的人工智能工具现在可实时扫描合同风险并建议优化，精度更高，支持包括中文在内的多语言输入。此更新包括高级条款检测和合规性检查。">
+                    Our enhanced AI tool now scans contracts for risks and suggests optimizations in real-time, with improved accuracy and support for multi-language inputs, including Chinese. This update includes advanced clause detection and compliance checks.
+                </p>
+                <div class="update-footer">
+                    <span class="read-more" role="button" tabindex="0"><i class="fas fa-chevron-down"></i> Read More</span>
+                    <div class="share-buttons">
+                        <button class="share-btn" aria-label="Copy link" data-tooltip="Copy Link"><i class="fas fa-link"></i></button>
+                        <button class="share-btn" aria-label="Share to WeChat" data-tooltip="WeChat"><i class="fab fa-weixin"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="update-card" data-category="ui" data-date="2025-04-01">
+                <span class="badge">UI Enhancement</span>
+                <div class="update-header">
+                    <div class="update-icon"><i class="fas fa-paint-brush"></i></div>
+                    <div>
+                        <div class="update-date">April 2025</div>
+                        <h2 class="lang-switch" data-en="Redesigned User Interface" data-zh="重新设计的用户界面">Redesigned User Interface</h2>
+                    </div>
+                </div>
+                <p class="lang-switch" data-en="Experience a sleeker, more compact dashboard with vibrant gradients, smoother animations, and a customizable layout. Optimized for both desktop and mobile, this redesign enhances usability and aesthetics." data-zh="体验更简洁、紧凑的仪表板，带有鲜艳的渐变、更流畅的动画和可定制的布局。针对桌面和移动设备优化，此重新设计提升了可用性和美观性。">
+                    Experience a sleeker, more compact dashboard with vibrant gradients, smoother animations, and a customizable layout. Optimized for both desktop and mobile, this redesign enhances usability and aesthetics.
+                </p>
+                <div class="update-footer">
+                    <span class="read-more" role="button" tabindex="0"><i class="fas fa-chevron-down"></i> Read More</span>
+                    <div class="share-buttons">
+                        <button class="share-btn" aria-label="Copy link" data-tooltip="Copy Link"><i class="fas fa-link"></i></button>
+                        <button class="share-btn" aria-label="Share to WeChat" data-tooltip="WeChat"><i class="fab fa-weixin"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="update-card" data-category="export" data-date="2025-03-01">
+                <span class="badge">New Feature</span>
+                <div class="update-header">
+                    <div class="update-icon"><i class="fas fa-file-pdf"></i></div>
+                    <div>
+                        <div class="update-date">March 2025</div>
+                        <h2 class="lang-switch" data-en="PDF Download in Chinese" data-zh="中文PDF下载">PDF Download in Chinese</h2>
+                    </div>
+                </div>
+                <p class="lang-switch" data-en="Export analysis reports as PDFs with full Chinese font support, ensuring seamless readability. This feature includes customizable templates and watermark options for professional outputs." data-zh="将分析报告导出为PDF，全面支持中文字体，确保无缝可读性。此功能包括可定制的模板和水印选项，以实现专业输出。">
+                    Export analysis reports as PDFs with full Chinese font support, ensuring seamless readability. This feature includes customizable templates and watermark options for professional outputs.
+                </p>
+                <div class="update-footer">
+                    <span class="read-more" role="button" tabindex="0"><i class="fas fa-chevron-down"></i> Read More</span>
+                    <div class="share-buttons">
+                        <button class="share-btn" aria-label="Copy link" data-tooltip="Copy Link"><i class="fas fa-link"></i></button>
+                        <button class="share-btn" aria-label="Share to WeChat" data-tooltip="WeChat"><i class="fab fa-weixin"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="feedback-section">
+            <h2 class="lang-switch" data-en="Share Your Opinion" data-zh="分享您的意见">Share Your Opinion</h2>
+            <form class="feedback-form" role="form" aria-label="User feedback form">
+                <label for="feedback-name" class="lang-switch" data-en="Name (Optional)" data-zh="姓名（可选）">Name (Optional)</label>
+                <input type="text" id="feedback-name" placeholder="Enter your name" class="lang-switch" data-zh="请输入您的姓名" aria-label="Name">
+
+                <label for="feedback-rating" class="lang-switch" data-en="Rating" data-zh="评分">Rating</label>
+                <div class="star-rating" role="radiogroup" aria-label="Rating">
+                    <input type="radio" name="rating" id="star5" value="5" aria-label="5 stars">
+                    <label for="star5" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="star4" value="4" aria-label="4 stars">
+                    <label for="star4" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="star3" value="3" aria-label="3 stars">
+                    <label for="star3" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="star2" value="2" aria-label="2 stars">
+                    <label for="star2" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="star1" value="1" aria-label="1 star">
+                    <label for="star1" class="fas fa-star"></label>
+                </div>
+
+                <label for="feedback-message" class="lang-switch" data-en="Your Feedback" data-zh="您的反馈">Your Feedback</label>
+                <textarea id="feedback-message" placeholder="Tell us what you think..." class="lang-switch" data-zh="告诉我们您的想法..." aria-label="Feedback message"></textarea>
+
+                <button type="submit" class="lang-switch" data-en="Submit Feedback" data-zh="提交反馈">Submit Feedback</button>
+                <div class="feedback-success lang-switch" data-en="Thank you for your feedback!" data-zh="感谢您的反馈！"></div>
+            </form>
+
+            <div class="feedback-list" aria-label="Recent feedback">
+                <!-- Feedback items will be added dynamically via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+   
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+        // Main Content Enhancements
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const languageToggle = document.getElementById('languageToggle');
+            const updatesSection = document.querySelector('.updates');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const sortSelect = document.querySelector('.sort-select');
+            const searchInput = document.querySelector('.updates-search input');
+            const searchButton = document.querySelector('.updates-search button');
+            const layoutToggle = document.querySelector('.layout-toggle');
+            const updateCards = document.querySelectorAll('.update-card');
+            const feedbackSection = document.querySelector('.feedback-section');
+            const feedbackForm = document.querySelector('.feedback-form');
+            const feedbackSuccess = document.querySelector('.feedback-success');
+            const feedbackList = document.querySelector('.feedback-list');
+            const starInputs = document.querySelectorAll('.star-rating input');
+            const starLabels = document.querySelectorAll('.star-rating label');
+
+            // Sidebar Toggle (Mobile)
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('full-width');
+            });
+
+            // Language Toggle
+            let isChinese = false;
+            languageToggle.addEventListener('click', () => {
+                isChinese = !isChinese;
+                document.querySelectorAll('.lang-switch').forEach(el => {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = isChinese ? el.dataset.zh : el.dataset.en;
+                    } else {
+                        el.textContent = isChinese ? el.dataset.zh : el.dataset.en;
+                    }
+                });
+                document.querySelectorAll('.en-content').forEach(el => {
+                    el.textContent = isChinese ? el.dataset.zh : el.textContent;
+                });
+            });
+
+            // Updates Filter
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filter = button.dataset.filter;
+                    updateCards.forEach(card => {
+                        card.style.display = filter === 'all' || card.dataset.category === filter ? 'block' : 'none';
+                    });
+                });
+            });
+
+            // Sort Updates
+            sortSelect.addEventListener('change', () => {
+                const sortOrder = sortSelect.value;
+                const cardsArray = Array.from(updateCards);
+                cardsArray.sort((a, b) => {
+                    const dateA = new Date(a.dataset.date);
+                    const dateB = new Date(b.dataset.date);
+                    return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+                });
+                updatesSection.innerHTML = '';
+                cardsArray.forEach(card => updatesSection.appendChild(card));
+            });
+
+            // Search Updates
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                updateCards.forEach(card => {
+                    const title = card.querySelector('h2').textContent.toLowerCase();
+                    const content = card.querySelector('p').textContent.toLowerCase();
+                    card.style.display = title.includes(query) || content.includes(query) ? 'block' : 'none';
+                });
+            });
+
+            searchButton.addEventListener('click', () => {
+                searchInput.dispatchEvent(new Event('input'));
+            });
+
+            // Layout Toggle
+            layoutToggle.addEventListener('click', () => {
+                const currentLayout = layoutToggle.dataset.layout;
+                updatesSection.classList.toggle('grid', currentLayout === 'timeline');
+                updatesSection.classList.toggle('timeline', currentLayout === 'grid');
+                layoutToggle.dataset.layout = currentLayout === 'grid' ? 'timeline' : 'grid';
+                layoutToggle.textContent = currentLayout === 'grid' ? 'Timeline View' : 'Grid View';
+            });
+
+            // Read More Toggle
+            document.querySelectorAll('.read-more').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const card = btn.closest('.update-card');
+                    const content = card.querySelector('p');
+                    content.classList.toggle('expanded');
+                    btn.innerHTML = content.classList.contains('expanded') ? 
+                        '<i class="fas fa-chevron-up"></i> Read Less' : 
+                        '<i class="fas fa-chevron-down"></i> Read More';
+                });
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        btn.click();
+                    }
+                });
+            });
+
+            // Share Buttons
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (btn.dataset.tooltip === 'Copy Link') {
+                        const url = window.location.href;
+                        navigator.clipboard.write(url).then(() => alert('Link copied to clipboard!'));
+                    } else if (btn.dataset.tooltip === 'WeChat') {
+                        alert('Share to WeChat (integration placeholder)');
+                    }
+                });
+            });
+
+            // Feedback Form
+            feedbackForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('feedback-name').value.trim();
+                const message = document.getElementById('feedback-message').value.trim();
+                const rating = document.querySelector('.star-rating input:checked')?.value;
+
+                if (!message) {
+                    alert(isChinese ? '请填写反馈内容' : 'Please enter your feedback');
+                    return;
+                }
+                if (!rating) {
+                    alert(isChinese ? '请选择评分' : 'Please select a rating');
+                    return;
+                }
+
+                // Simulate submission
+                feedbackSuccess.style.display = 'block';
+                setTimeout(() => {
+                    feedbackSuccess.style.display = 'none';
+                }, 3000);
+
+                // Add to feedback list (client-side)
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'feedback-item';
+                feedbackItem.innerHTML = `
+                    <span class="author">${name || (isChinese ? '匿名' : 'Anonymous')}</span>
+                    <div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>
+                    <p>${message}</p>
+                `;
+                feedbackList.prepend(feedbackItem);
+
+                // Reset form
+                feedbackForm.reset();
+                starLabels.forEach(label => label.classList.remove('active'));
+            });
+
+            // Star Rating Interaction
+            starInputs.forEach((input, index) => {
+                input.addEventListener('change', () => {
+                    starLabels.forEach((label, i) => {
+                        label.classList.toggle('active', i >= starLabels.length - index - 1);
+                    });
+                });
+            });
+
+            // Scroll Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            updateCards.forEach(card => observer.observe(card));
+            observer.observe(feedbackSection);
+        });
+    </script>
+</body>
+</html>

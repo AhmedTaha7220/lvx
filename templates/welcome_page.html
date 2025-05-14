@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVXIN - AI Legal Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/wel.css">
+    <style>
+     
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="律心标志">
+            </a>
+        </div>
+       
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+            <a href="signin_to_upload" class="primary-btn en-content">
+                <i class="fas fa-sign-in-alt"></i> 登录
+            </a>
+        </div>
+    </nav>
+
+    <!-- 英雄部分 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="brand-name">律心</h1>
+                <h2>人工智能法律解决方案</h2>
+                <p>为现代商业创新提供先进的人工智能法律解决方案</p>
+                <div class="stats-bar">
+                    <div class="stat">
+                        <i class="fas fa-file-contract"></i>
+                        <span>{{contracts_number}} 份合同已分析</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-user-tie"></i>
+                        <span>{{accounts_number}} 位用户信任我们</span>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-container">
+                <div class="logo-header">
+                    <div class="main-logo">律心</div>
+                    <div style="color:rgb(255, 255, 255); font-weight: bold; font-size: 16px;" class="sub-logo">人工智能合同分析</div>
+                    <div style="color: #ffffff; font-weight: bold; font-size: 0.8rem;">注意！（如果您的文件包含图片）我们正在开发OCR功能，在完成之前，请在上传前将您的文档转换为文本</div>
+                </div>
+                <div class="upload-card">
+                    <div class="drag-drop-area">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-instructions">拖放您的合同文件或点击浏览</p>
+                        <p class="file-requirements">支持格式：PDF、DOCX、DOC • 最大文件大小：25MB</p>
+                        <div id="fileList" class="selected-file"></div>
+                    </div>
+                    <input type="file" id="file-input" hidden accept=".pdf,.docx,.doc">
+                    <button class="analyze-btn" onclick="handleAnalysis()">分析文档</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 如何运作 -->
+    <div class="container">
+        <section class="how-it-works">
+            <h2 class="section-title">如何运作</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-file-upload"></i></div>
+                    <h3 class="step-title">上传</h3>
+                    <p class="step-desc">上传任何支持格式的法律文件</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-brain"></i></div>
+                    <h3 class="step-title">人工智能分析</h3>
+                    <p class="step-desc">我们的AI分析文档以识别风险和机会</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-search"></i></div>
+                    <h3 class="step-title">审阅</h3>
+                    <p class="step-desc">审阅高亮显示的风险和建议的改进</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-file-download"></i></div>
+                    <h3 class="step-title">导出</h3>
+                    <p class="step-desc">导出详细报告和修订后的文档</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 示例结果 -->
+    <div class="container">
+        <section class="sample-results" id="sample-results">
+            <h2 class="section-title">示例分析结果</h2>
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-title">劳动合同分析</div>
+                    <div>示例结果</div>
+                </div>
+                <div class="result-body">
+                    <div class="risk-item">
+                        <div class="risk-level high">高风险</div>
+                        <div class="risk-clause">第8.2节：竞业禁止条款</div>
+                        <div class="risk-desc">竞业禁止条款延长至5年，超出大多数司法管辖区的法律可执行限制。建议缩短至1-2年。</div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-level medium">中风险</div>
+                        <div class="risk-clause">第5.3节：终止通知</div>
+                        <div class="risk-desc">3天通知期短于许多司法管辖区要求的标准30天通知期，可能导致合规问题。</div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-level low">低风险</div>
+                        <div class="risk-clause">第3.1节：薪酬条款</div>
+                        <div class="risk-desc">年度薪资审查条款缺乏具体的加薪标准。建议添加绩效指标以提高清晰度。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 服务 -->
+    <div class="container">
+        <section class="services">
+            <h2 class="section-title">我们提供的服务</h2>
+            <div class="service-cards">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                    <h3 class="service-title">智能合同审查</h3>
+                    <p class="service-desc">人工智能驱动的合同分析和优化，识别风险</p>
+                    <a href="#" class="learn-more">了解更多 →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="service-title">绩效分析</h3>
+                    <p class="service-desc">实时业务绩效跟踪和合规监控</p>
+                    <a href="#" class="learn-more">了解更多 →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-search-dollar"></i></div>
+                    <h3 class="service-title">估值研究</h3>
+                    <p class="service-desc">全面的市场估值分析和竞争洞察</p>
+                    <a href="#" class="learn-more">了解更多 →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 客户评价 -->
+    <div class="container">
+        <section class="testimonials">
+            <h2 class="section-title">客户成功案例</h2>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">绿信革新了我们的法律运营。我们实现了85%的更快合规检查，并在第一季度将运营成本降低了40%！</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">张涛</div>
+                    <div class="author-info">
+                        <h4>张涛</h4>
+                        <p>深圳科技公司法律总监</p>
+                    </div>
+                </div>
+                <div class="testimonial-metrics">
+                    <div class="metric">
+                        <div class="metric-value">85%</div>
+                        <div class="metric-label">更快合规</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">40%</div>
+                        <div class="metric-label">成本降低</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 行动号召部分 -->
+    <div class="container">
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>今天开始您的AI法律之旅</h2>
+                <p>使用我们的14天免费试用，无需信用卡即可体验律心。</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-btn">开始免费试用</a>
+                    <a href="#" class="secondary-btn">安排演示</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h3>公司</h3>
+                        <ul>
+                            <li><a href="#">关于我们</a></li>
+                            <li><a href="#">职业</a></li>
+                            <li><a href="#">新闻</a></li>
+                            <li><a href="#">联系</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>产品</h3>
+                        <ul>
+                            <li><a href="#">功能</a></li>
+                            <li><a href="#">定价</a></li>
+                            <li><a href="#">集成</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>资源</h3>
+                        <ul>
+                            <li><a href="#">文档</a></li>
+                            <li><a href="#">指南</a></li>
+                            <li><a href="#">博客</a></li>
+                            <li><a href="#">网络研讨会</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>法律</h3>
+                        <ul>
+                            <li><a href="#">隐私政策</a></li>
+                            <li><a href="#">服务条款</a></li>
+                            <li><a href="#">安全</a></li>
+                            <li><a href="#">合规</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="scanner-showcase">
+                    <div class="scanner-images">
+                        <div class="scanner-card">
+                            <img src="../static/images/red_qr.png" alt="二维码扫描" class="scanner-img">
+                            <p class="scanner-desc">在小红书上联系我们</p>
+                        </div>
+                        <div class="scanner-card">
+                            <img src="../static/images/we_chat.jpg" alt="微信扫描" class="scanner-img">
+                            <p class="scanner-desc">在微信上联系</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 律心科技。保留所有权利。
+                </div>
+                <div class="icp-link">
+                    <a href="https://beiancx.miit.gov.cn/#/Integrated/index" target="_blank">ICP：粤ICP备2025383351号-1</a>
+                </div>
+                <div class="social-media">
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+        // File Upload Handling
+        const dropZone = document.querySelector('.drag-drop-area');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('fileList');
+        const analyzeBtn = document.querySelector('.analyze-btn');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const files = e.dataTransfer.files;
+            if (files.length) {
+                fileInput.files = files;
+                displayFileName(files[0]);
+            }
+            dropZone.classList.remove('dragover');
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                displayFileName(e.target.files[0]);
+            }
+        });
+
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        function displayFileName(file) {
+            fileList.textContent = `${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+        }
+
+        async function handleAnalysis() {
+            const fileInput = document.getElementById('file-input');
+            const analyzeBtn = document.querySelector('.analyze-btn');
+        
+            if (!fileInput.files.length) {
+                alert('Please select a file first!');
+                return;
+            }
+        
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            analyzeBtn.disabled = true;
+        
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+        
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+        
+                // Check if the response is a redirect (status 303)
+                if (response.redirected) {
+                    // Follow the redirect by updating the browser's location
+                    window.location.href = response.url;
+                } else if (response.ok) {
+                    // If the response is not a redirect but still OK, try parsing JSON
+                    const result = await response.json();
+                    console.log('File URL:', result.file_url);
+                    window.location.href = result.redirect;
+                } else {
+                    // Handle non-OK responses
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Analysis failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: ' + error.message);
+                analyzeBtn.innerHTML = 'Analyze Document';
+                analyzeBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

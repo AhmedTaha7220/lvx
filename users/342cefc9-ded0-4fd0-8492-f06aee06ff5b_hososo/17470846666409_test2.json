@@ -1,0 +1,69 @@
+[
+    {
+        "Usage": {
+            "input": 0,
+            "unit": "page"
+        },
+        "RequestId": "01DBD74D-5F3D-5F38-A8CA-04A9B33F8908",
+        "Output": {
+            "result": {
+                "examineResult": "此处无需修改",
+                "ruleTitle": "投标保证金要求,收取金额计算",
+                "examineBrief": "本任务为审查投标保证金要求及收取金额计算,合同中未涉及投标保证金的内容。因此,合同文本在此方面不存在缺陷或风险,无需进行修改。",
+                "riskLevel": "normal",
+                "subRisks": [
+                    {
+                        "resultType": "通过"
+                    }
+                ],
+                "ruleSequence": "2.1"
+            },
+            "resultTaskId": "1c9a5e55-c2b3-49c6-88e4-0eb8f550857b"
+        },
+        "Success": true,
+        "httpStatusCode": "200"
+    },
+    {
+        "Usage": {
+            "input": 0,
+            "unit": "page"
+        },
+        "RequestId": "01DBD74D-5F3D-5F38-A8CA-04A9B33F8908",
+        "Output": {
+            "result": {
+                "examineResult": "需要修改",
+                "ruleTag": "审查合同的合法性",
+                "ruleTitle": "投标保证金要求,收取金额计算",
+                "examineBrief": "本任务为审查合同主体条款。合同中仅提供了甲乙双方的公司名称,但未提供完整的主体信息,如统一社会信用代码、法定代表人姓名、住所地等。此外,也未明确双方是否依法成立并有效存续。因此,合同文本存在缺陷或风险,应当进行修正,以避免潜在的法律风险。",
+                "riskLevel": "high",
+                "subRisks": [
+                    {
+                        "riskClause": "合同主体条款",
+                        "riskBrief": "主体信息不完整",
+                        "riskExplain": "合同中仅提供了甲乙双方的公司名称,但未提供完整的主体信息,如统一社会信用代码、法定代表人姓名、住所地等,存在法律风险。",
+                        "resultType": "需修改",
+                        "originalContent": "甲方:上海东普信息科技有限公司\n乙方:深圳市优博讯科技股份有限公司",
+                        "resultContent": "甲方:上海东普信息科技有限公司,住所地:上海市浦东新区XX路XX号,法定代表人:张三,统一社会信用代码:91310000MA1K3XXXXX\n乙方:深圳市优博讯科技股份有限公司,住所地:深圳市南山区XX路XX号,法定代表人:李四,统一社会信用代码:91440300MA5FXXXXXX"
+                    }
+                ],
+                "ruleSequence": "1.1"
+            },
+            "resultTaskId": "1c9a5e55-c2b3-49c6-88e4-0eb8f550857b"
+        },
+        "Success": true,
+        "httpStatusCode": "200"
+    },
+    {
+        "Usage": {
+            "input": 1,
+            "unit": "page"
+        },
+        "RequestId": "01DBD74D-5F3D-5F38-A8CA-04A9B33F8908",
+        "Output": {
+            "result": {},
+            "resultTaskId": "1c9a5e55-c2b3-49c6-88e4-0eb8f550857b"
+        },
+        "Success": true,
+        "httpStatusCode": "200"
+    }
+]

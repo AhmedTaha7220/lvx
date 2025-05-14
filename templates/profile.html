@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - LVXIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/stylee.css">
+    <style>
+         
+        /* Main Content */
+        
+        .main-content {
+            margin-left: 240px;
+            padding: 4rem 2rem;
+            flex: 1;
+            margin-top: 80px;
+            /* Creates space below the navbar */
+        }
+        
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .avatar-upload {
+            position: relative;
+            margin-right: 2rem;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+        
+        .upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .upload-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .profile-info h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+        
+        .profile-info p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+        }
+        
+        .profile-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--body-bg);
+            color: var(--text-primary);
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c62828;
+            transform: translateY(-2px);
+        }
+        
+        .security-settings {
+            margin-top: 2rem;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--primary);
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1rem;
+            }
+            .navbar {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .avatar-upload {
+                margin-right: 0;
+            }
+        }
+       
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="绿信标志">
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="subscriptions" class="en-content">定价</a>
+            <a href="aboutus" class="en-content">关于我们</a>
+            <a href="helpcenter" class="en-content">帮助中心</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- Elfsight 网站翻译器 | 无标题网站翻译器 -->
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+
+            <a href="profile" class="profile-component">
+                <img src="../static/images/profile.jpeg" class="profile-image" alt="个人资料图片">
+                <span class="profile-name">{{name}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+        <div class="nav-section">
+            <div class="nav-title">团队数据库</div>
+           
+            <a href="upload_contract" class="nav-item"> <i class="fas fa-file-upload"></i> 上传合同 </a>
+            <a href="history" class="nav-item"> <i class="fas fa-history"></i> 分析历史 </a>
+            <a href="analysis" class="nav-item"> <i class="fas fa-folder-open"></i> 文档分析 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">账户</div>
+            <a href="profile" class="nav-item active"> <i class="fas fa-user"></i> 用户资料 </a>
+            <a href="subscriptions" class="nav-item"> <i class="fas fa-star"></i> 订阅 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">支持</div>
+            <a href="contactus" class="nav-item"> <i class="fas fa-envelope"></i> 联系我们 </a>
+            <a href="helpcenter" class="nav-item"> <i class="fas fa-question-circle"></i> 常见问题 </a>
+            <a href="aboutus" class="nav-item"> <i class="fas fa-info-circle"></i> 关于我们 </a>
+            <a href="whats-new" class="nav-item "><i class="fas fa-info-circle"></i>有什么新的</a>
+        </div>
+    </nav>
+
+<!-- 主内容 -->
+<div class="main-content">
+    <main class="profile-container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <h1>{{name}}</h1>
+            </div>
+        </div>
+        <div class="profile-card">
+            <h2>个人信息</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" id="full_name" name="full_name" value="{{name}}">
+                </div>
+                <div class="form-group">
+                    <label>电子邮箱</label>
+                    <input type="text" id="email" name="email" value="{{email}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="age">年龄</label>
+                    <input type="number" id="age" name="age" value="{{age}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="language">语言</label>
+                    <input type="text" id="language" name="language" list="language-options" placeholder="选择或输入" value="{{language}}">
+                    <datalist id="language-options">
+                        <option value="中文（简体）"></option>
+                        <option value="中文（繁体）"></option>
+                        <option value="英文"></option>
+                        <option value="日文"></option>
+                        <option value="韩文"></option>
+                        <option value="法文"></option>
+                        <option value="德文"></option>
+                        <option value="西班牙文"></option>
+                        <option value="俄文"></option>
+                        <option value="阿拉伯文"></option>
+                        <option value="其他（请注明）"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="country">国家</label>
+                    <input type="text" id="country" name="country" list="country-options" placeholder="选择或输入" value="{{country}}">
+                    <datalist id="country-options">
+                        <option value="中国大陆"></option>
+                        <option value="香港特别行政区"></option>
+                        <option value="澳门特别行政区"></option>
+                        <option value="台湾"></option>
+                        <option value="日本"></option>
+                        <option value="韩国"></option>
+                        <option value="新加坡"></option>
+                        <option value="美国"></option>
+                        <option value="英国"></option>
+                        <option value="澳大利亚"></option>
+                        <option value="加拿大"></option>
+                        <option value="德国"></option>
+                        <option value="法国"></option>
+                        <option value="埃及"></option>
+                        <option value="沙特阿拉伯"></option>
+                        <option value="其他欧盟国家"></option>
+                        <option value="其他亚洲国家"></option>
+                        <option value="其他中东国家"></option>
+                        <option value="其他（请输入您的国家）"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label>电话号码</label>
+                    <input type="tel" id="user_phone" name="user_phone" value="{{phone}}">
+                </div>
+                                <div class="form-group">
+                    <label>当前密码</label>
+                    <input type="password" id="current_password" name="current_password" required>
+                </div>
+                <div class="form-group">
+                    <label>新密码</label>
+                    <input type="password" id="new_password" name="new_password">
+                </div>
+                <button type="submit" class="btn btn-primary">保存更改</button>
+            </form>
+            <button id="deleteAccountBtn" class="btn btn-danger" style="margin-top: 1em;">Delete my account</button>
+            <div id="profile-message"></div>
+        </div>
+    </main>
+</div>
+<script>
+document.getElementById('profileForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = {
+        full_name: document.getElementById('full_name').value,
+        email: document.getElementById('email').value,
+        age: parseInt(document.getElementById('age').value),
+        language: document.getElementById('language').value,
+        country: document.getElementById('country').value,
+        user_phone: document.getElementById('user_phone').value,
+        current_password: document.getElementById('current_password').value,
+        new_password: document.getElementById('new_password').value
+    };
+    try {
+        const response = await fetch('/profile_changes', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (response.ok) {
+            document.getElementById('profile-message').innerText = 'Profile updated successfully!';
+        } else {
+            document.getElementById('profile-message').innerText = result.message || 'Update failed!';
+        }
+    } catch (err) {
+        document.getElementById('profile-message').innerText = 'Network error!';
+    }
+});
+// Delete account handler
+document.getElementById('deleteAccountBtn').addEventListener('click', async function() {
+    if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        return;
+    }
+    const email = document.getElementById('email').value;
+    try {
+        const response = await fetch('/delete_account', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ email })
+        });
+        if (response.ok) {
+            // Redirect to welcome page
+            window.location.href = '/welcome_page';
+        } else {
+            const result = await response.json();
+            document.getElementById('profile-message').innerText = result.detail || result.message || 'Delete failed!';
+        }
+    } catch (err) {
+        document.getElementById('profile-message').innerText = 'Network error!';
+    }
+});
+</script>
+</body>
+
+</html>

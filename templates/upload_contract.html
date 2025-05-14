@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVXIN - Upload Contract</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/stylee.css">
+    <style>
+        
+        
+        /* Main Content */
+        
+        .main-content {
+            margin-left: 240px;
+            padding: 1rem 2rem;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .upload-container {
+            width: 50%;
+            max-width: 800px;
+        }
+        
+        .logo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .main-logo {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .sub-logo {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+        
+        .upload-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.15);
+        }
+        
+        .drag-drop-area {
+            border: 2px dashed var(--primary);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .drag-drop-area:hover,
+        .drag-drop-area.dragover {
+            background: rgba(74, 144, 226, 0.1);
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-instructions {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-requirements {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .contract-type-select {
+            width: 100%;
+            padding: 1rem;
+            margin: 2rem 0;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .contract-type-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+        }
+        
+        .analyze-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        
+        .selected-file {
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .main-content {
+            margin-left: 240px;
+            padding: 4rem 2rem;
+            flex: 1;
+            margin-top: 80px;
+            /* Creates space below the navbar */
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1rem;
+            }
+            .navbar {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+        /* Profile Component Styles */
+        .profile-component {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--primary);
+        }
+        
+        .profile-component:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+        }
+        
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-name {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        body.dark-mode .profile-name {
+            color: var(--dark-text);
+        }
+        
+        /* Responsive Profile */
+        @media (max-width: 768px) {
+            .profile-component {
+                padding: 0.5rem;
+                gap: 0.5rem;
+            }
+            .profile-name {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="绿信标志">
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="subscriptions" class="en-content">定价</a>
+            <a href="aboutus" class="en-content">关于我们</a>
+            <a href="helpcenter" class="en-content">帮助中心</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="icon-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- Elfsight 网站翻译器 | 无标题网站翻译器 -->
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+            <div class="elfsight-app-6f017616-600a-46e6-a14a-f6ac550a093e" data-elfsight-app-lazy></div>
+
+            <a href="profile" class="profile-component">
+                <img src="../static/images/profile.jpeg" class="profile-image" alt="个人资料图片">
+                <span class="profile-name">{{name}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+        <div class="nav-section">
+            <div class="nav-title">团队数据库</div>
+            
+            <a href="upload_contract" class="nav-item active"> <i class="fas fa-file-upload"></i> 上传合同 </a>
+            <a href="history" class="nav-item"> <i class="fas fa-history"></i> 分析历史 </a>
+            <a href="analysis" class="nav-item"> <i class="fas fa-folder-open"></i> 文档分析 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">账户</div>
+            <a href="profile" class="nav-item"> <i class="fas fa-user"></i> 用户资料 </a>
+            <a href="subscriptions" class="nav-item"> <i class="fas fa-star"></i> 订阅 </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">支持</div>
+            <a href="contactus" class="nav-item"> <i class="fas fa-envelope"></i> 联系我们 </a>
+            <a href="helpcenter" class="nav-item"> <i class="fas fa-question-circle"></i> 常见问题 </a>
+            <a href="aboutus" class="nav-item"> <i class="fas fa-info-circle"></i> 关于我们 </a>
+            <a href="whats-new" class="nav-item "><i class="fas fa-info-circle"></i> 有什么新的 </a>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <div class="upload-container">
+            <div class="logo-header">
+                <div class="main-logo">律心</div>
+                <div class="sub-logo">人工智能合同分析</div>
+            </div>
+            <div class="upload-card">
+                <div class="drag-drop-area">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p class="upload-instructions">拖放您的合同文件或点击浏览</p>
+                    <p class="file-requirements">支持格式：PDF、DOCX、DOC • 最大文件大小：25MB</p>
+                    <div id="fileList" class="selected-file"></div>
+                </div>
+                <input type="file" id="file-input" hidden accept=".pdf,.docx,.doc">
+                <button class="analyze-btn" onclick="handleAnalysis()">分析文档</button>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    function toggleTheme() {
+        isDarkMode = !isDarkMode;
+        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+    document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+    // File Upload Handling
+    const dropZone = document.querySelector('.drag-drop-area');
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('fileList');
+    const analyzeBtn = document.querySelector('.analyze-btn');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            fileInput.files = files;
+            displayFileName(files[0]);
+        }
+        dropZone.classList.remove('dragover');
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+            displayFileName(e.target.files[0]);
+        }
+    });
+
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    function displayFileName(file) {
+        fileList.textContent = `${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+    }
+
+    async function handleAnalysis() {
+        if (!fileInput.files.length) {
+            alert('Please select a file first!');
+            return;
+        }
+        
+        analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+        analyzeBtn.disabled = true;
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        
+        try {
+            // Instead of handling the redirect manually, we'll check the response headers
+            // or just let the browser handle the redirect naturally
+            const response = await fetch('/analyze_upload', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            // Your FastAPI endpoint returns a redirect, not JSON
+            // So we shouldn't try to parse response.json()
+            console.log('Response status:', response.status);
+            
+            // If we somehow get here (we shouldn't normally since browser should redirect),
+            // just redirect manually
+            window.location.href = '/loading';
+            
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error: ' + error.message);
+            analyzeBtn.innerHTML = 'Analyze Document';
+            analyzeBtn.disabled = false;
+        }
+    }
+</script>
+<!-- Footer -->
+</body>
+
+</html>

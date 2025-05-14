@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lvxin Legal Technology Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../static/CSS/stylee.css">
+    
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --primary-hover: #2563EB;
+            --secondary: #9ea7e7;
+            --secondary-hover: #9ea7e7;
+            --accent: #F59E0B;
+            --accent-hover: #D97706;
+            --success: #10B981;
+            --success-hover: #059669;
+            --background: #F9FAFB;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --border-light: #F3F4F6;
+            --nav-bg: rgba(255, 255, 255, 0.98);
+            --card-bg: #F9FAFB;
+            --hover-bg: #F3F4F6;
+            --sidebar-width: 200px;
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition-speed: 0.15s;
+            --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        [data-theme="dark"] {
+    --primary: #6366F1;
+    --primary-hover: #4F46E5;
+    --primary-light: #A5B4FC;
+    --secondary: #8B5CF6;
+    --secondary-hover: #7C3AED;
+    --secondary-light: #C4B5FD;
+    --accent: #FBBF24;
+    --accent-hover: #F59E0B;
+    --success: #34D399;
+    --success-hover: #10B981;
+    --background: #0F172A;
+    --text-primary: #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --border: #374151;
+    --border-light: #1F2937;
+    --nav-bg: rgba(17, 24, 39, 0.98);
+    --card-bg: #1F2937;
+    --hover-bg: #1F2937;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            transition: all var(--transition-speed) var(--transition-easing);
+        }
+        
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.4;
+            font-size: 14px;
+            padding-top: 50px;
+            display: flex;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            line-height: 1.3;
+        }
+        
+        h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+        h2 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+        h3 { font-size: 1.1rem; margin-bottom: 0.6rem; }
+        h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+        
+        p {
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            background: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .logo img {
+            height: 24px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover img {
+            transform: scale(1.05) rotate(4deg);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 0.2rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width var(--transition-speed) var(--transition-easing);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-hover), var(--secondary-hover));
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-icon {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text-secondary);
+        }
+        
+        .btn-icon:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+            transform: scale(1.05);
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            position: fixed;
+            top: 50px;
+            left: 0;
+            height: calc(100vh - 50px);
+            padding: 0.8rem 0;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+            z-index: 900;
+        }
+        
+        [data-theme="dark"] .sidebar {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+        
+        .nav-section {
+            padding: 0 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+            padding-left: 0.4rem;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0.6rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .nav-item i {
+            font-size: 1rem;
+            width: 18px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+            /* Theme Toggle */
+
+#themeToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+#themeToggle:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 1.5rem 2rem;
+            flex: 1;
+            margin-top: 50px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .tab {
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            transition: all 0.3s var(--transition-easing);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tab:hover {
+            background: var(--hover-bg);
+            color: var(--primary);
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            background: var(--background);
+            border-color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            z-index: 2;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
+        }
+        
+        .card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+        
+        .badge-primary {
+            background: color-mix(in srgb, var(--primary), transparent 90%);
+            color: var(--primary);
+        }
+        
+        .badge-success {
+            background: color-mix(in srgb, var(--success), transparent 90%);
+            color: var(--success);
+        }
+        
+        .badge-danger {
+            background: color-mix(in srgb, #EF4444, transparent 90%);
+            color: #EF4444;
+        }
+        
+        /* Tooltips */
+        [data-tooltip] {
+            position: relative;
+        }
+        
+        [data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: var(--background);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            margin-bottom: 0.4rem;
+            z-index: 100;
+        }
+        
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Profile */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+        }
+        
+        .profile-image {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid var(--border-light);
+        }
+        
+        .profile:hover .profile-image {
+            border-color: var(--primary);
+        }
+        
+        .profile-name {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            max-width: 250px;
+            height: 180px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Grid Utility */
+        .grid {
+            display: grid;
+        }
+        
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .gap-4 { gap: 1rem; }
+        
+        .bg-red-100 { background: color-mix(in srgb, #EF4444, transparent 90%); }
+        .bg-green-100 { background: color-mix(in srgb, var(--success), transparent 90%); }
+        .bg-yellow-100 { background: color-mix(in srgb, #F59E0B, transparent 90%); }
+        
+        .w-full { width: 100%; }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: var(--sidebar-width);
+                padding: 1.2rem 1.5rem;
+                padding-top: 100px;
+            }
+            .sidebar {
+                width: var(--sidebar-width);
+                top: 50px;
+                height: calc(100vh - 50px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 0.8rem 1rem;
+                gap: 0.6rem;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                display: none;
+            }
+            .actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .main-content {
+                padding: 1rem;
+                padding-top: 120px;
+                margin-left: var(--sidebar-width);
+            }
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            .chart-container {
+                max-width: 200px;
+                height: 150px;
+            }
+            .grid-cols-3, .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .btn {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            .profile-name {
+                display: none;
+            }
+            .profile {
+                padding: 0.3rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+/* Theme Toggle */
+
+#themeToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+#themeToggle:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+}
+.container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+        .alert.show {
+            display: block;
+        }
+        .alert button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .alert .ok {
+            background: #3498db;
+            color: white;
+        }
+        .alert .cancel {
+            background: #e74c3c;
+            color: white;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .overlay.show {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="welcome_page">
+                <img src="../static/images/logo.jpg" alt="绿信标志" onerror="this.src='https://via.placeholder.com/40?text=Logo'; this.onerror=null;">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="subscriptions">定价</a>
+            <a href="aboutus">关于我们</a>
+            <a href="helpcenter">帮助中心</a>
+        </div>
+        <div class="actions">
+            <button id="themeToggle" class="btn-icon" aria-label="切换主题">
+                <i class="fas fa-moon"></i>
+            </button>
+            </button>
+            <div class="elfsight-app-fce75b10-069c-41d5-bca0-09c33e812801" data-elfsight-app-lazy></div>
+            <a href="profile" class="profile-component">
+                <img src="../static/images/profile.jpg" class="profile-image" alt="个人资料图片">
+                <span class="profile-name">{{name}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+        <div class="nav-section">
+            <h3 class="nav-title">团队数据库</h3>
+            
+            <a href="upload_contract" class="nav-item"><i class="fas fa-file-upload"></i> 上传合同</a>
+            <a href="history" class="nav-item"><i class="fas fa-history"></i> 分析历史</a>
+            <a href="analysis" class="nav-item"><i class="fas fa-folder-open"></i> 文档分析</a>
+        </div>
+        <div class="nav-section">
+            <h3 class="nav-title">账户</h3>
+            <a href="profile" class="nav-item"><i class="fas fa-user"></i> 用户资料</a>
+            <a href="subscriptions" class="nav-item"><i class="fas fa-star"></i> 订阅</a>
+        </div>
+        <div class="nav-section">
+            <h3 class="nav-title">支持</h3>
+            <a href="contactus" class="nav-item"><i class="fas fa-envelope"></i> 联系我们</a>
+            <a href="helpcenter" class="nav-item"><i class="fas fa-question-circle"></i> 常见问题</a>
+            <a href="aboutus" class="nav-item"><i class="fas fa-info-circle"></i> 关于我们</a>
+            <a href="whats-new" class="nav-item "><i class="fas fa-info-circle"></i>有什么新的</a>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <!-- 标签 -->
+        <div class="tabs">
+            <div class="tab active" onclick="openTab('executive')">高管分析</div>
+            <div class="tab" onclick="openTab('your')">您的分析</div>
+            <div class="tab" onclick="openTab('financial')">财务影响</div>
+            <div class="tab" onclick="openTab('team')">团队风险分析</div>
+            <div class="tab" onclick="openTab('risk')">风险预测</div>
+            <div class="tab" onclick="openTab('decision')">AI决策支持</div>
+            <div class="tab" onclick="openTab('cross')">跨合同风险</div>
+            <div class="tab" onclick="openTab('resource')">资源分配</div>
+        </div>
+
+        <!-- 标签内容 -->
+        <div id="executive" class="tab-content active">
+            <h1>高管分析仪表板</h1>
+            <p>日期范围：2025年3月1日 - 2025年3月31日</p>
+            <div class="card">
+                <h2>高管摘要</h2>
+                <p>本月平台使用量增加2%，总计超过40次分析。用户满意度保持在94%的高位。劳动合同和保密协议中识别出关键风险领域。收入达到283,500美元，超出目标10%。机会领域：扩展人力资源模板，增加企业客户采用率。</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>月收入：283,500美元</div>
+                    <div>活跃用户：152（比2月增加10%）</div>
+                    <div>用户满意度：94%（比2月增加2%）</div>
+                    <div>转化率：28%（比2月增加4%）</div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>业务增长趋势</h2>
+                <div class="chart-container">
+                    <canvas id="executiveChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>战略洞察与建议</h2>
+                <p>洞察：转化率下降与人力资源模板开发受限有关。建议在4月15日前扩展5个人力资源模板。</p>
+                <p>行动：指派李俊在4月15日前领导模板扩展。</p>
+            </div>
+            <div class="card bg-red-100">
+                <h2>关键警报</h2>
+                <p>企业客户Tech Corp本月下降20%</p>
+                <p>劳动合同分析中有8个高优先级标志</p>
+            </div>
+        </div>
+
+        <div id="your" class="tab-content">
+            <h1>欢迎，马哈茂德</h1>
+            <p>让我们审阅您的合同分析</p>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="card">
+                    <button class="btn btn-primary w-full">开始</button>
+                </div>
+                <div class="card">
+                    <button class="btn btn-success w-full">查看</button>
+                </div>
+                <div class="card">
+                    <button class="btn btn-warning w-full">升级</button>
+                </div>
+            </div>
+            <div class="card">
+                <h2>合同健康指标</h2>
+                <div class="chart-container">
+                    <canvas id="yourChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>近期活动</h2>
+                <p>合同分析：今天上午10:23</p>
+                <p>修订生成：昨天，下午3:45</p>
+                <p>报告导出：2025年1月10日</p>
+            </div>
+        </div>
+
+        <div id="financial" class="tab-content">
+            <h1>财务影响评估</h1>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="card">总风险敞口：2,835,600美元</div>
+                <div class="card bg-green-100">潜在风险缓解节省：1,985,000美元</div>
+                <div class="card">修复成本：420,000美元</div>
+                <div class="card bg-green-100">风险缓解投资回报率：372%</div>
+            </div>
+            <div class="card">
+                <h2>按风险类型划分的财务影响</h2>
+                <div class="chart-container">
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>预算分配建议</h2>
+                <p>知识产权修复：190,000美元</p>
+                <p>隐私合规更新：120,000美元</p>
+                <p>责任条款审查：70,000美元</p>
+                <p>其他风险：40,000美元</p>
+            </div>
+        </div>
+
+        <div id="team" class="tab-content">
+            <h1>团队风险分析仪表板</h1>
+            <p>日期范围：2025年3月1日 - 2025年3月31日</p>
+            <div class="card">
+                <h2>风险摘要</h2>
+                <p>团队在本期内识别出1,243个合同风险问题（比上月增加6%）。关键风险增加12%，主要集中在科技行业合同的知识产权条款上。修复率达到76%，在财务条款问题上表现最佳。中国管辖区。</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>总风险问题：1,243</div>
+                    <div>关键风险：87（比2月增加12%）</div>
+                    <div>风险修复：76%（比2月增加6%）</div>
+                    <div>解决时间：3.4天（比上月缩短0.6天）</div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>按类型划分的风险分布</h2>
+                <div class="chart-container">
+                    <canvas id="teamChart1"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>团队风险表现</h2>
+                <div class="chart-container">
+                    <canvas id="teamChart2"></canvas>
+                </div>
+            </div>
+            <div class="card bg-red-100">
+                <h2>关键警报</h2>
+                <p>Tech Corp合同中有28个高风险知识产权条款。指派审查团队。</p>
+            </div>
+            <div class="card bg-yellow-100">
+                <h2>警报</h2>
+                <p>新隐私法规影响43份中国合同。</p>
+            </div>
+        </div>
+
+        <div id="risk" class="tab-content">
+            <h1>风险预测与趋势分析</h1>
+            <div class="card">
+                <h2>风险量预测</h2>
+                <div class="chart-container">
+                    <canvas id="riskChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>风险速度指标</h2>
+                <p>知识产权风险：高</p>
+                <p>隐私合规：中</p>
+                <p>责任条款：低</p>
+                <p>付款条款：中</p>
+                <p>终止权：低</p>
+            </div>
+            <div class="card">
+                <h2>新兴风险警报</h2>
+                <p>新数据隐私法（中国）预计到2025年7月影响42份合同</p>
+                <p>知识产权保护变化（美国）因正在进行的许可诉讼而紧急</p>
+                <p>付款条款趋势：行业从Net-60转向Net-45</p>
+            </div>
+        </div>
+
+        <div id="decision" class="tab-content">
+            <h1>AI决策支持中心</h1>
+            <div class="card bg-red-100">
+                <h2>关键知识产权风险：Tech Corp服务协议</h2>
+                <p>知识产权条款将所有开发技术无限制分配给客户，与中国合同法第326条关于独立预存的条款相矛盾。</p>
+                <div class="grid grid-cols-3 gap-4">
+                    <div>AI风险严重性评分：86/100</div>
+                    <div>财务敞口：780,000美元</div>
+                    <div>响应紧急性：紧急（建议48小时内）</div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>AI生成决策路径</h2>
+                <!-- 决策路径图将使用SVG或D3.js等库实现 -->
+            </div>
+            <div class="card">
+                <h2>推荐行动</h2>
+                <p>主要建议：提出替代条款，将知识产权分配限制为工作声明中明确为客户项目创建的工作，同时保留对预存工作的权利。</p>
+                <p>替代方法：双重许可模式、升级路径、法律依据</p>
+            </div>
+        </div>
+
+        <div id="cross" class="tab-content">
+            <h1>跨合同风险模式检测</h1>
+            <div class="card">
+                <h2>风险模式可视化地图</h2>
+                <!-- 可视化地图将使用SVG或D3.js等库实现 -->
+            </div>
+            <div class="card">
+                <h2>常见风险元素检测</h2>
+                <table>
+                    <tr><td>“所有知识产权应归……”</td><td>76%</td><td>高</td><td>修复</td></tr>
+                    <tr><td>“承包商应对所有损害负责……”</td><td>46%</td><td>中</td><td>修复</td></tr>
+                    <tr><td>“争议解决应在……管辖区内进行”</td><td>38%</td><td>低</td><td>修复</td></tr>
+                </table>
+                <p>78%的所有问题可以通过标准化模板更新修复</p>
+            </div>
+            <div class="card">
+                <h2>风险趋势分析</h2>
+                <div class="chart-container">
+                    <canvas id="crossChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="resource" class="tab-content">
+            <h1>资源分配工具</h1>
+            <div class="card">
+                <h2>团队工作负载平衡</h2>
+                <!-- 条形图表示将使用Chart.js实现 -->
+            </div>
+            <div class="card">
+                <h2>团队技能矩阵</h2>
+                <!-- 矩阵将使用表格或网格实现 -->
+            </div>
+            <div class="card">
+                <h2>任务分配建议</h2>
+                <table>
+                    <tr><td>Tech Corp知识产权条款审查</td><td>知识产权</td><td>4-6小时</td><td>李俊（95%匹配）</td><td>关键</td><td>分配</td></tr>
+                    <tr><td>隐私政策更新（中国）</td><td>隐私</td><td>8-12小时</td><td>王磊（84%匹配）</td><td>高</td><td>分配</td></tr>
+                    <tr><td>供应商责任条款审计</td><td>责任</td><td>5-7小时</td><td>陈燕（78%匹配）</td><td>中</td><td>分配</td></tr>
+                    <tr><td>付款条款标准化</td><td>付款</td><td>3-4小时</td><td>刘伟（90%匹配）</td><td>标准</td><td>分配</td></tr>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <script>
+        // Sample data for charts with enhanced aesthetics
+        const executiveData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Revenue',
+                data: [200000, 220000, 283500, 250000, 260000],
+                borderColor: '#3B82F6',
+                backgroundColor: ctx => {
+                    const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
+                    gradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
+                    gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+                    return gradient;
+                },
+                borderWidth: 3,
+                tension: 0.4,
+                pointBackgroundColor: '#3B82F6',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#3B82F6',
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }]
+        };
+        const yourData = {
+            labels: ['Employment', 'NDA', 'Service', 'Sales'],
+            datasets: [{
+                label: 'Health',
+                data: [80, 70, 90, 85],
+                backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'],
+                borderColor: ['#FF6B6B', '#4ECDC4', '#45B intend7D1', '#96CEB4'],
+                borderWidth: 2,
+                barThickness: 20,
+                borderRadius: 5
+            }]
+        };
+        const financialData = {
+            labels: ['IP Rights', 'Privacy', 'Liability', 'Payment', 'Termination'],
+            datasets: [{
+                label: 'Impact',
+                data: [1500000, 800000, 600000, 300000, 200000],
+                backgroundColor: ctx => {
+                    const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
+                    gradient.addColorStop(0, 'rgba(255, 99, 132, 0.8)');
+                    gradient.addColorStop(1, 'rgba(255, 99, 132, 0.2)');
+                    return gradient;
+                },
+                borderColor: '#FF6384',
+                borderWidth: 2,
+                barThickness: 20,
+                borderRadius: 5
+            }]
+        };
+        const teamData1 = {
+            labels: ['IP Rights', 'Privacy', 'Liability', 'Payment', 'Termination'],
+            datasets: [{
+                label: 'Distribution',
+                data: [87, 63, 48, 24, 21],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                borderWidth: 0,
+                cutout: '70%',
+                rotation: 90
+            }]
+        };
+        const teamData2 = {
+            labels: ['Li Jun', 'Zhang Min', 'Wang Lei', 'Chen Yan', 'Liu Wei'],
+            datasets: [{
+                label: 'Issues',
+                data: [100, 80, 70, 60, 50],
+                backgroundColor: '#FF6384',
+                barThickness: 20,
+                borderRadius: 5
+            }, {
+                label: 'Critical',
+                data: [20, 15, 10, 5, 5],
+                backgroundColor: '#36A2EB',
+                barThickness: 20,
+                borderRadius: 5
+            }]
+        };
+        const riskData = {
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+            datasets: [{
+                label: 'Risk Volume',
+                data: [400, 500, 600, 700, 800, 900, 1000],
+                borderColor: '#FF6B6B',
+                backgroundColor: ctx => {
+                    const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
+                    gradient.addColorStop(0, 'rgba(255, 107, 107, 0.5)');
+                    gradient.addColorStop(1, 'rgba(255, 107, 107, 0)');
+                    return gradient;
+                },
+                borderWidth: 3,
+                tension: 0.4,
+                pointBackgroundColor: '#FF6B6B',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#FF6B6B',
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }]
+        };
+        const crossData = {
+            labels: ['Q3/24', 'Q4/24'],
+            datasets: [{
+                label: 'IP Rights',
+                data: [50, 60],
+                borderColor: '#FF6384',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 5
+            }, {
+                label: 'Privacy',
+                data: [40, 45],
+                borderColor: '#36A2EB',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 5
+            }, {
+                label: 'Liability',
+                data: [30, 35],
+                borderColor: '#FFCE56',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 5
+            }]
+        };
+
+        // Chart initialization with enhanced options
+        new Chart(document.getElementById('executiveChart').getContext('2d'), {
+            type: 'line',
+            data: executiveData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { color: 'var(--border-light)' } },
+                    x: { ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { display: false } }
+                },
+                animation: { duration: 1500, easing: 'easeOutQuart' }
+            }
+        });
+        new Chart(document.getElementById('yourChart').getContext('2d'), {
+            type: 'bar',
+            data: yourData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { color: 'var(--border-light)' } },
+                    x: { ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { display: false } }
+                },
+                animation: { duration: 1200, easing: 'easeOutBounce' }
+            }
+        });
+        new Chart(document.getElementById('financialChart').getContext('2d'), {
+            type: 'bar',
+            data: financialData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { color: 'var(--border-light)' } },
+                    x: { ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { display: false } }
+                },
+                animation: { duration: 1200, easing: 'easeOutBounce' }
+            }
+        });
+        new Chart(document.getElementById('teamChart1').getContext('2d'), {
+            type: 'doughnut',
+            data: teamData1,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                animation: { duration: 1500, easing: 'easeOutQuart' }
+            }
+        });
+        new Chart(document.getElementById('teamChart2').getContext('2d'), {
+            type: 'bar',
+            data: teamData2,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { color: 'var(--border-light)' } },
+                    x: { ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { display: false } }
+                },
+                animation: { duration: 1200, easing: 'easeOutBounce' }
+            }
+        });
+        new Chart(document.getElementById('riskChart').getContext('2d'), {
+            type: 'line',
+            data: riskData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { color: 'var(--border-light)' } },
+                    x: { ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { display: false } }
+                },
+                animation: { duration: 1500, easing: 'easeOutQuart' }
+            }
+        });
+        new Chart(document.getElementById('crossChart').getContext('2d'), {
+            type: 'line',
+            data: crossData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: 'var(--text-primary)', font: { family: 'Inter', size: 12 } } },
+                    tooltip: { backgroundColor: '#1f2937', titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { color: 'var(--border-light)' } },
+                    x: { ticks: { color: 'var(--text-secondary)', font: { family: 'Inter' } }, grid: { display: false } }
+                },
+                animation: { duration: 1500, easing: 'easeOutQuart' }
+            }
+        });
+
+        // Tab switching with smooth transition
+        function openTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+
+            const selectedTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
+            const selectedContent = document.getElementById(tabName);
+
+            selectedTab.classList.add('active');
+            setTimeout(() => {
+                selectedContent.classList.add('active');
+            }, 50);
+        }
+
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('themeToggle').querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('sidebar-open');
+        });
+
+       // Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+// Apply initial theme
+document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+function toggleTheme() {
+    isDarkMode = !isDarkMode;
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    localStorage.setItem('darkMode', isDarkMode);
+
+    // Update charts if they exist
+    if (riskChartInstance || resultChartInstance) {
+        initializeCharts(processedData);
+    }
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+
+// Remove the conflicting event listener
+// The following line should be removed from the original code:
+// document.getElementById('themeToggle').addEventListener('click', () => { ... });
+
+// Resize handler for charts
+window.addEventListener('resize', () => {
+    if (riskChartInstance) riskChartInstance.resize();
+    if (resultChartInstance) resultChartInstance.resize();
+});
+
+    </script>
+</body>
+</html>
